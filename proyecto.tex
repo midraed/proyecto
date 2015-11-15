@@ -1,0 +1,218 @@
+\documentclass[]{article}
+\usepackage[cmex10]{amsmath}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage[utf8]{inputenc}
+
+%opening
+\title{%Estimación de la evapotranspiración real de vid a diferentes escalas mediante modelos matemáticos y sensores remotos\\
+	\textbf{Proyecto:} Estimación de la evapotranspiración real de vid mediante modelos físicos y sensores remotos, a escala planta, parcelaria y regional}
+
+\author{Postulante: Guillermo Federico Olmedo}
+\date{}
+
+% Mejoras al titulo:
+% - diferentes escalas: especificarlas? A algunos les gusto, a otros les falto detalle
+% - modelos matematicos y sensores remotos: no incluye lisimetria, los modelos son fisicos? 
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+La estimación de las necesidades de agua de los cultivos a partir de la cuantificación de la evapotranspiración real (Etr) del cultivo es un paso importante en la producción agrícola, debido a que los rendimientos y los costos están directamente relacionados a esta. En general los métodos usados son de carácter local, como los coeficientes de cultivo, o el uso de lisímetros, sistemas de covarianza de los torbellinos o la relación de Bowen. Estos métodos, si bien son precisos, tienen limitaciones para ser extrapolados a escala parcelaria y/o regional. Bajo las hipótesis de que: los coeficientes duales permiten modelar el uso de agua de la planta; los sensores proximales permiten medir la variabilidad de consumo de agua en una parcela de vid; y que los sensores remotos, junto con modelos físicos permiten estimar la ETr de la vid, el objetivo general de este proyecto es estimar la evapotranspiración real de vid mediante modelos físicos y sensores remotos, a escala planta, parcelaria y regional. A escala planta, se estudiará la ETr mediante el uso de un lisímetro de pesada, y con esta información se ajustarán coeficientes de cultivo simples y duales. A escala parcelaria se estudiará la variabilidad en estos coeficientes estudiando la diferencias en crecimiento vegetativo, área foliar y fracción de cobertura. Para la estimación de estos parámetros se utilizarán sensores proximales terrestres y aéreos no tripulados. Finalmente se aplicarán modelos físicos para estimar a partir de sensores remotos, la ecuación de balance de energía y de esa forma conocer el consumo de agua de la planta a escala regional. Los resultados esperados son: obtener coeficientes de cultivo para plantas de vid, Malbec, conducidas en espaldera y su variabilidad espacial intraparcelaria;  y conocer las necesidades de agua de la vid y su variabilidad a escala parcelaria y regional.
+\end{abstract}
+
+\smallskip
+\noindent \textbf{Keywords.} evapotranspiración real, vid, riego, sensores remotos, balance de energía de la superficie
+
+\clearpage
+
+\section{Identificación del proyecto}
+
+Postulante: OLMEDO, Guillermo Federico\\
+Director: ORTEGA FARÍAS, Samuel (UTalca, Chile)\\ 
+Co-director:  VALLONE, Rosana (INTA – UNCuyo)\\
+Disciplinas: Riego, Geomática, Viticultura de precisión, Modelos de balance de energía de la superficie.
+
+\section{Fundamentación del problema}
+
+% Para que sirve?
+% Quienes se beneficiaran
+% Ayudara a resolver un problema?
+% Que aporta al conocimiento actual?
+% Creará nuevos instrumentos ... ?
+
+%http://www.diariouno.com.ar/mendoza/Irrigacion-presento-por-primera-vez-el-balance-hidrico-de-Mendoza-20140918-0084.html
+
+% Y Fasciolo 2012??
+
+El desarrollo de las actividades economicas en la Provincia de Mendoza, se encuentra limitado por la aridez y el pronunciado déficit hídrico \citep{DGI2014}. El escaso 3\% de la superficie de Mendoza desarrollado bajo oasis artificiales, la aridez que caracteriza a la provincia y el pronunciado déficit hídrico, impiden o limitan el desarrollo de gran parte de las actividades económicas. El desarrollo se encuentra limitado por la ausencia de suficiente oferta de recurso hídrico para satisfacer el crecimiento del área sujeta a regadío o la expansión de otras actividades que, como la urbana, minera o industrial, requieren de la utilización del agua. Hoy la distribución de agua se basa fundamentalmente en la oferta existente. 
+
+De acuerdo al Departamento General de Irrigación (\cite{DGI2014}) en el ciclo 2014-2015, los ríos de Mendoza, transportarán un volumen de agua que no superará la media histórica, debido a las escasas nevadas caídas hasta setiembre de este año. De esta manera los ríos Mendoza, Tunuyán, Diamante y Malargue, ingresarán en el quinto año consecutivo de emergencia hídrica, en tanto, el río Atuel, en el sexto. En general, los volúmenes a escurrir en todos los ríos de la provincia de Mendoza, se encuentran por debajo de las medias históricas, con porcentajes menores al 65\% de  las mismas, en casi todas las cuencas provinciales. 
+
+%A pesar de dicho déficit, la Provincia junto a otras áreas de la región, presentan el mayor desarrollo alcanzado por "unidad de agua disponible" –según conclusiones de la Comisión Económica para América Latina y el Caribe en 1991-. Sin embargo, ese desarrollo se encuentra en la actualidad -al menos en función de las tecnologías y modalidades de uso del agua difundidas en la zona-, limitado por la ausencia de suficiente oferta de recurso hídrico para satisfacer el crecimiento del área sujeta a regadío o la expansión de otras actividades que, como la urbana, minera o industrial, requieren de la utilización del agua. La relación entre el carácter unitario y finito de este vital recurso y el constante desarrollo poblacional obligan a un permanente mejoramiento de la eficiencia en el uso del agua, a fin de evitar la crisis de sustentabilidad que ha sido anunciada desde antiguo y revalidada en épocas modernas (Malthus, 1997; Maedows et al, 1972).
+%http://www.bolsamza.com.ar/revistanew/content.php?id_contenido=317
+
+%Pocas regiones áridas acumulan tantos años de registro de las acumulaciones anuales de nieve, y de los caudales de los principales ríos que atraviesan su territorio, como las provincias de Cuyo. El  cuidadoso registro, validación, análisis de esa información y su aplicación a diversas metodologías de pronóstico, permite una mejor estimación del comportamiento futuro de los escurrimientos.
+
+%La acumulación nívea observada  en el frente cordillerano hasta finales del mes de septiembre de 2014, entre  los  paralelos  30º  y  36º  de  latitud  Sur,  se  ha  caracterizado  como  una  temporada deficitaria,  respecto  de  los  valores  medios  históricos, en todas las  cuencas  de  los  ríos  de  la Provincia.
+%Se observa que la acumulación nívea actual, en las altas cuencas de los ríos cordilleranos, está entre las más bajas de los últimos años. 
+
+La determinación de la evapotranspiración real de cultivo ($ET_r$) a escala regional es de fundamental importancia para distribuir eficientemente el agua de riego en los oasis y facilitar la toma de decisiones de los administradores y usuarios del recurso. Permite, además, relacionándola con el agua entregada a nivel de canal, estimar indicadores de eficiencia en el uso del agua. 
+
+Tradicionalmente, la evapotranspiración real del cultivo ($ET_r$) ha sido estimada multiplicando la evapotranspiración del cultivo de referencia ($ET_o$) por un coeficiente de cultivo ($K_c$), determinado de acuerdo al tipo y estado de crecimiento del cultivo \citep{Allen2006}. Siempre está la pregunta sobre si el valor de $K_c$ idealizado es aplicable al crecimiento vegetativo y estado de desarrollo reales, sobre todo en áreas de déficit de recurso hídrico. Por otro lado, es complicado determinar las condiciones actuales de crecimiento de cultivo en un área extendida como los oasis. Los datos satelitales son ideales para derivar datos continups de ETc usando técnicas de balance de energía. Hace más de una década atrás, regionalmente se abordaron algunas de estas técnicas, pero sin aplicación práctica \citep{Bermejillo1998}. 
+
+La estimación de las necesidades de agua de los cultivos a partir de la cuantificación de la evapotranspiración real (Etr) del cultivo es un paso importante en la producción agrícola, debido a que los rendimientos y los costos están directamente relacionados a esta. En general los métodos usados son de carácter local, como los coeficientes de cultivo, o el uso de lisímetros, sistemas de covarianza de los torbellinos o la relación de Bowen. Estos métodos, si bien son precisos, tienen limitaciones para ser extrapolados a escala parcelaria y/o regional. Además pueden existir grandes variaciones con la evapotranspiración real del cultivo al no considerar variaciones temporales y espaciales causadas por la heterogeneidad de la lluvia y el riego, el suelo, la densidad de las plantas, variabilidad microclimática y diferencias en el estado fenológico \citep{Allen2011}. 
+
+\section{Estado del arte}
+
+Los sensores remotos son un aporte a la estimación de la ET utilizando sensores remotos, que consideran los patrones espacio temporales en el suelo. Los sensores remotos han permitido diferentes enfoques para estimar la ETr siguiendo enfoques físicos o empíricos. Uno de los modelos mas citados para estimar la ETr a partir del modelo de balance de energía de la superficie, es METRIC (en inglés Mapping EvapoTranspiration at high Resolution with Internalized Calibration) \citep{Allen2007a}. METRIC fue desarrollado en base al reconocido modelo SEBAL (del inglés Surface Energy Balance Algorithm for Land) \citep{Bastiaanssen1998a, Bastiaanssen1998b}. 
+
+Estos métodos basado en procesamiento de imágenes satelitales para calcular la ETr como un residuo del balance de energía de la superficie de la Tierra. Su gran innovación es que en el modelado del balance energético, usa el gradiente de temperatura cercano a la superficie, $dT$, íntimamente relacionado a la temperatura de superficie medida radiométricamente, eliminando la necesidad de un modelo de temperatura de la superficie aerodinámicamente preciso y absoluto y la necesidad de mediciones de la temperatura del aire para estimar el flujo de calor sensible en superficie. Además otras ventajas sobre los métodos tradicionales de balances de energía obtenidos con satélite: 
+
+\begin{itemize}
+	\item que su calibración se realiza utilizando solamente $ET_o$. El uso de esta variable para la extrapolación de la $ET_r$ instantánea para periodos de 24hs o mayores, compensa los efectos de advección regional por no ligar $ET_r$ a la radiación neta, dado que la $ET_c$ puede exceder la radiación neta diaria en muchas áreas áridas o semiáridas.
+	\item ni los estados de crecimiento ni el tipo de cultivo necesitan ser conocidos ($K_c$)
+	\item el balance de energía también permite detectar ETc restringida por déficit hídrico ($K_h$) y limitantes edáficas ($K_s$).
+\end{itemize}
+
+Los avances en la tecnología  de la percepción remota,  la modelización matemática y la instalación de un lisímetro de pesada en cultivo de vid en Luján de Cuyo, Mendoza, posibilitarían la estimación de la $ET_r$ y el desarrollo de un sitio web para la adquisición del dato en tiempo real. Los mapas de $ET_r$ obtenidos, permitirían además comparar consumos entre parcelas y zonas, cuantificar el uso de agua mensual y por temporada, apoyar modelos de agua subterránea, determinar coeficientes y curvas medias de $K_c$ para diferentes sistemas productivos.
+
+%% Coeficientes de cultivo duales
+Sin embargo, cuando los cultivos tienen una cobertura parcial del suelo, el uso de coeficientes duales de cultivo es mas apropiado. El cultivo de la vid, conducido en espaldera puede tener una fracción de cobertura ($f_c$) de enrte 30 y 35\% \citep{Poblete-Echeverria2012a}. Además con coeficientes duales de cultivo también son mas apropiados bajo prácticas de riego de alta frecuecia, como en el caso de riego por goteo. 
+
+El uso de  coeficientes duales.. .. bla. Empiezo por \citep{Allen2000}.
+
+Aplicaciones en vid: \citep{Poblete-Echeverria2012a} y \citep{Zhao2015a}.
+
+Y apoyo con sensores remotos en \citep{Er-Raki2007}, y particion en \citep{Er-Raki2010}.
+
+%% Variabilidad intraparcelaria
+
+
+
+%% SEnsores remotos y LSEB
+El enfoque de SEBAL (balance de energía de la superficie) utiliza datos de temperatura de la superficie mediante sensores remotos, la reflectividad y NDVI. Este modelo utiliza un esquema de transferencia con una fuente de resistencia, donde se deriva $r_{s} $, $H$, y $\lambda E$ a la humedad de suelos cercana a la superficie. Este esquema hace un uso explícito de la variabilidad espacial observada de la temperatura de la superficie, y su reflectancia en una escena completa libre de nubes. 
+
+
+\cite{Kalma2008} menciona que el error de unos 30 trabajos de validacion mendiante métodos de flujo (eddy correlation, bowen ratio) publicados esta en torno a 50 $W m^2$ y los errores relativos son de entre 15\% y 30\%. Este autor también menciona que la comparación muestra que los métodos analíticos y físicos mas complejos no son necesariamente mas precisos que los enfoques empíricos / estadísticos. 
+Se ha mejorado mucho el conocimiento de los procesos de evaporación, a escala local, a partir del trabajo con Edddy correlation / Bowen ratio. Pero estas observaciones raramente pueden extenderse a grandes areas, debido a la heterogeneidad de las superficies y la naturaleza dinámica de los procesos de transferencia del calor. 
+En general lo métodos para estimar la $E$ mediante sensores remotos difieren en: (i) tipo y extensión espacial de la aplicación; (ii) tipo de dato de sensores remotos; (iii) el uso de información (micro) meteorologica y de cobertura de suelos.
+De acuerdo a Su (2002, citado por \cite{Kalma2008}) hay 3 grandes enfoques en los métodos de balance de energía. El enfoque residual: como en METRIC donde se estima el$LE$, a partir de la diferencia entre la $Rn$, y $H$ y $G$. El segundo enfoque utiliza el índice de estrés hídrico para estimar la evapotranspiración relativa (la relación entre la $ETa/ETp$) y luego estimar la $ETa$ conociendo la $ETp$, a partir de datos meteorlógicos. Y el tercer y último enfoque es calcular todos los componentes del balance de energía a nivel de superficie mediante modelos continuos de superficie (LSM, por sus siglas en inglés) que incluyen modelos de transferencia suelos--planta--atmósfera (SVAT). 
+La temperatura del suelo superficial incide en los cuatro términos de la ecuación del balance de energía, y en la radiación de onda larga saliente en la ecuación de radiación neta.
+La temperatura radiativa de la superficie, medida por un radiómetro infrarrojo desde una plataforma espacial, se asume como aproximadamente la temperatura radiométrica hemiesférica (Norman and Becker, 1995 citado por \cite{Kalma2008}).
+La temperatura de la superficie medida por sensores remotos tiene efectos atmosféricos relacionados con la absorción de la radiación infrarroja por vapor de agua en la atmósfera.
+
+\subsection{Sensible heat flux}
+
+Table \ref{tab:components} shows a review of some errors reported about METRIC model. In this sense, net radiation ($R_n$) and soil heat flux ($G$) usually had the lowest estimation errors. Sensible heat flux ($H$), is the hardest component of surface energy balance to estimate. As \cite{Allen2007a} mentions, the computation of latent heat flux ($LE$) is only as accurate as the summed estimates for Rn, G, and H. 
+
+One reported weak of METRIC model is the selection of the anchor pixels. In \cite{long2013assessing} and \cite{mortonassessing} the differences in H estimation produced by different trained users were evaluated, showing important biases; while in \cite{choragudi2011sensitivity, wang2009sensitivity} an analysis showed the high sensitivity of the model respect to the hot pixel.
+
+The aforementioned causes that the METRIC estimation of $H$ be very sensible to the selection of anchor pixels, due that a group of possible candidates could have minimal differences in some attributes, but these differences can generate important bias in the estimations.
+
+In the early implementations of METRIC, the anchor pixels selection was done manually by an operator, but then a methodology to an automation procedure  was proposed in \cite{allenautomated2013} using statistical conditions and expert knowledge. This method  aiming to avoid the effect of human criteria that helps to increase the model robustness.
+
+\section{Marco teórico}
+
+METRIC ha sido aplicado en muchos países del mundo para estimar la ET de los cultivos, a escalas parcelarias en grandes superficies, utilizando imágenes satelitales. Este modelo se ha aplicado a diferentes cultivos como maiz, trigo, soja y alfalfa con excelentes resultados (errores de 3 a 20\%) \citep{Allen2007b, Choi2009, Mkhwanazi2012}. En años recientes se ha aplicado a cultivos leñosos con canopeos esparcidas como viñas y olivos \citep{Poblete-Echeverria2012, Carrasco-Benavides2014, Santos2012, Pocas2014}. Y recientemente se a aplicado a superficies con mucha pendiente \citep{Allen2013}.
+
+METRIC estima la ETr como residuo de la ecuación de balance de energía (Ec. \ref{eq:EB}), utilizando información de imágenes satelitales y de una estación meteorológica ubicada dentro del área de estudio. 
+
+\begin{equation}
+\label{eq:EB}
+LE = R_n - G - H
+\end{equation}
+
+donde $LE$ es el flujo de calor latente consumido en el proceso de evapotranspiración ($W \cdot m^{-2}$); $R_n$ es la radiación neta ($W \cdot m^{-2}$); $G$ es el flujo de calor al suelo ($W \cdot m^{-2}$); y $H$ es el flujo de calor sensible trasmitido por convección al aire ($W \cdot m^{-2}$).
+
+La $R_n$ es calculada considerando los valores de la imagen satelital y datos referidos al momento de captura. Algunos procesos de corrección son necesarios, como correcciones radiométricas y atmosféricas \citep{Tasumi2008a}. $G$ es estimado utilinzando una ecuación empírica, propuesta por \cite{Allen2007a} y adaptada a vid por \cite{Carrasco-Benavides2014}. Esta ecuación considera la $R_n$, la temperatura de superficie, índices de vegetación y el albedo. 
+
+Luego, $H$ es estimada a partir de la selección de píxeles ancla en la imagen. La estimación de $H$ considera la ecuación general de transporte de calor (Ec. \ref{eq2}), donde $dT$ es  la diferencia de temperatura entre la superficie y el aire, $r_{ah}$ es la resistencia aerodinámica al transporte de calor ($s \cdot m^{-1}$), $\rho$ es la densidad del aire ($kg \cdot m^{-3}$) y $c_{p}$ es le calor específico del aire ($1004\cdot J \cdot kg^{-1} \cdot K^{-1}$). 
+
+\begin{equation}
+\label{eq2}
+H=\frac{\rho \cdot c_{p} \cdot dT}{r_{ah}} 
+\end{equation}
+
+La estimación de $dT$ es calculada utilizando la relación linear entre la temperatura del aire y  los píxeles ancla, como es descripto en  \cite{Bastiaanssen1998a}. Para estimar $r_{ah}$, se extrapola la velocidad del viento (medida en la estación meteorológica) a una altura donde se lo considera constante (por ejemplo, 200 meters), y se le aplica un procesos de corrección de la estabilidad iterativo basado en las ecuaciones de Monin-Obhukov \cite{Allen1996}.
+
+Luego, $LE$ es estimado con la ecuación \ref{eq:EB}, y posteriormente, la evapotranspiración instantánea se calcula como:
+
+\begin{equation}
+ET_{inst} = 3600 \cdot \frac{LE}{\lambda \rho_w}
+\end{equation}
+
+donde $ET_{inst}$ es la evapotranspiración instantánea en el momento de pasada del satélite ($mm \cdot h^{-1}$); 3600 es un factor de conversión para pasar de segundos a hora; $\rho_w$ es la densidad del agua = 1000 $kg\cdot m^{-3}$; y $\lambda$ es el calor latente de vaporización del agua ($J\cdot kg^{-1}$).
+
+Finalmente la ETr diaria es calculada para cada píxel (30 x 30 m) mediante:
+\begin{equation}
+ET_{24} = \frac{ET_{inst}}{ET_r} ET_{r\_24}
+\label{eq:et24}
+\end{equation}
+
+\section{Hipótesis}
+\begin{itemize}
+\item Los coeficientes duales permiten modelar por separado el proceso de evaporación del suelo y la transpiración de la planta.
+\item Los sensores proximales permiten medir la variabilidad de consumo de agua en una parcela de vid.
+\item Los sensores remotos, junto con modelos físicos permiten estimar la evapotranspiración real de la vid.
+
+%\item Utilizando modelos de balance de energía y sensores remotos, se pueden obtener los mismos resultados que utilizando modelos hídricos mediantes un lisímetro de pesada
+
+\end{itemize}
+
+\section{Objetivos}
+
+\textit{Objetivo General}: Estimar la evapotranspiración real de vid mediante modelos físicos y sensores remotos, a escala planta, parcelaria y regional \\
+
+\textit{Objetivo específicos}: 
+\begin{enumerate}
+	\item Obtener coeficientes duales para la estimación de la evaporación y la transpiración en viñedos
+	\item Desarrollar un método que permita medir la variabilidad intraparcelaria del consumo de agua mediante sensores proximales
+	\item Evaluar las necesidades de agua de la vid mediante el empleo de modelos físicos y de balance de energía, a escala regional
+\end{enumerate}
+
+\section{Metodología}
+
+Este proyecto es de investigación aplicada, ya que se utilizarán bases teóricas físicas sobre el balance de energía de la superficie para aportar información en el consumo de agua de la vid.
+
+El alcance de esta investigación es explicativo,  ya que evaluará las interacciones entre la energía  disponible  y la vegetación para entender el proceso de evapotranspiración real de las plantas.
+
+Se realizará un estudio observacional, mediante sensores proximales y remotos para estudiar viñedos a escalas parcelaria y regional e inferir el consumo de agua, a partir de un enfoque cuantitativo utilizando modelos físico-matemáticos.
+
+Este estudio es diacrónico ya que se evaluarán las variables en estudio a lo largo del ciclo del cultivo y en diferentes años.
+
+%Como voy a probar cada hipotesis. Procedimientos de obtenicion y de analisis de datos. Instrumental metodologico o tecnico. Etapas.
+
+\subsection{Objetivo Específico 1}
+Obtener coeficientes duales para la estimación de la evaporación y la transpiración en viñedos.
+
+
+
+Los modelos de doble capa permiten modelar por separado el proceso de evaporación del suelo y la transpiración de la planta
+
+\subsection{Objetivo Específico 2}
+Desarrollar un método que permita medir la variabilidad intraparcelaria del consumo de agua mediante sensores proximales
+
+Los sensores proximales permiten medir la variabilidad de consumo de agua en una parcela de vid
+
+\subsection{Objetivo Específico 3}
+Evaluar las necesidades de agua de la vid mediante el empleo de modelos físicos y de balance de energía, a escala regional
+
+Los sensores remotos, junto con modelos físicos permiten estimar la evapotranspiración real de la vid
+
+\section{Resultados Esperados}
+
+
+
+
+
+
+
+\bibliographystyle{apalike}
+\bibliography{library}
+
+
+
+\end{document}

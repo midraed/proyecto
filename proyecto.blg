@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Arch Linux)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: proyecto.aux
+The style file: apalike.bst
+Database file #1: library.bib
+Warning--I didn't find a database entry for "long2013assessing"
+Warning--I didn't find a database entry for "mortonassessing"
+Warning--I didn't find a database entry for "choragudi2011sensitivity"
+Warning--I didn't find a database entry for "wang2009sensitivity"
+Warning--I didn't find a database entry for "allenautomated2013"
+Warning--empty journal in Allen2000
+Warning--empty institution in DGI2014
+Warning--there's a number but no volume in Mkhwanazi2012
+Warning--there's a number but no volume in Poblete-Echeverria2012a
+You've used 23 entries,
+            1935 wiz_defined-function locations,
+            639 strings with 9462 characters,
+and the built_in function-call counts, 10264 in all, are:
+= -- 982
+> -- 551
+< -- 7
++ -- 196
+- -- 194
+* -- 974
+:= -- 1827
+add.period$ -- 69
+call.type$ -- 23
+change.case$ -- 211
+chr.to.int$ -- 21
+cite$ -- 27
+duplicate$ -- 315
+empty$ -- 634
+format.name$ -- 223
+if$ -- 1922
+int.to.chr$ -- 3
+int.to.str$ -- 0
+missing$ -- 22
+newline$ -- 118
+num.names$ -- 69
+pop$ -- 171
+preamble$ -- 1
+purify$ -- 212
+quote$ -- 0
+skip$ -- 230
+stack$ -- 0
+substring$ -- 719
+swap$ -- 22
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 136
+warning$ -- 4
+while$ -- 81
+width$ -- 0
+write$ -- 299
+(There were 9 warnings)
