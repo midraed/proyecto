@@ -3,17 +3,24 @@
 \usepackage{graphicx}
 \usepackage{natbib}
 \usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{
+	colorlinks,
+	linkcolor={red!50!black},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
+}
+
+\usepackage{lineno}
+%\linenumbers
 
 %opening
-\title{%Estimación de la evapotranspiración real de vid a diferentes escalas mediante modelos matemáticos y sensores remotos\\
-	\textbf{Proyecto:} Estimación de la evapotranspiración real de vid mediante modelos físicos y sensores remotos, a escala planta, parcelaria y regional}
+\title{\textbf{Proyecto:} Estimación de la evapotranspiración real de vid mediante modelos físicos y sensores remotos, a escala planta, parcelaria y regional}
 
 \author{Postulante: Guillermo Federico Olmedo}
 \date{}
-
-% Mejoras al titulo:
-% - diferentes escalas: especificarlas? A algunos les gusto, a otros les falto detalle
-% - modelos matematicos y sensores remotos: no incluye lisimetria, los modelos son fisicos? 
+ 
 
 \begin{document}
 
@@ -37,27 +44,9 @@ Disciplinas: Riego, Geomática, Viticultura de precisión, Modelos de balance de
 
 \section{Fundamentación del problema}
 
-% Para que sirve?
-% Quienes se beneficiaran
-% Ayudara a resolver un problema?
-% Que aporta al conocimiento actual?
-% Creará nuevos instrumentos ... ?
-
-%http://www.diariouno.com.ar/mendoza/Irrigacion-presento-por-primera-vez-el-balance-hidrico-de-Mendoza-20140918-0084.html
-
-% Y Fasciolo 2012??
-
 El desarrollo de las actividades economicas en la Provincia de Mendoza, se encuentra limitado por la aridez y el pronunciado déficit hídrico \citep{DGI2014}. El escaso 3\% de la superficie de Mendoza desarrollado bajo oasis artificiales, la aridez que caracteriza a la provincia y el pronunciado déficit hídrico, impiden o limitan el desarrollo de gran parte de las actividades económicas. El desarrollo se encuentra limitado por la ausencia de suficiente oferta de recurso hídrico para satisfacer el crecimiento del área sujeta a regadío o la expansión de otras actividades que, como la urbana, minera o industrial, requieren de la utilización del agua. Hoy la distribución de agua se basa fundamentalmente en la oferta existente. 
 
-De acuerdo al Departamento General de Irrigación (\cite{DGI2014}) en el ciclo 2014-2015, los ríos de Mendoza, transportarán un volumen de agua que no superará la media histórica, debido a las escasas nevadas caídas hasta setiembre de este año. De esta manera los ríos Mendoza, Tunuyán, Diamante y Malargue, ingresarán en el quinto año consecutivo de emergencia hídrica, en tanto, el río Atuel, en el sexto. En general, los volúmenes a escurrir en todos los ríos de la provincia de Mendoza, se encuentran por debajo de las medias históricas, con porcentajes menores al 65\% de  las mismas, en casi todas las cuencas provinciales. 
-
-%A pesar de dicho déficit, la Provincia junto a otras áreas de la región, presentan el mayor desarrollo alcanzado por "unidad de agua disponible" –según conclusiones de la Comisión Económica para América Latina y el Caribe en 1991-. Sin embargo, ese desarrollo se encuentra en la actualidad -al menos en función de las tecnologías y modalidades de uso del agua difundidas en la zona-, limitado por la ausencia de suficiente oferta de recurso hídrico para satisfacer el crecimiento del área sujeta a regadío o la expansión de otras actividades que, como la urbana, minera o industrial, requieren de la utilización del agua. La relación entre el carácter unitario y finito de este vital recurso y el constante desarrollo poblacional obligan a un permanente mejoramiento de la eficiencia en el uso del agua, a fin de evitar la crisis de sustentabilidad que ha sido anunciada desde antiguo y revalidada en épocas modernas (Malthus, 1997; Maedows et al, 1972).
-%http://www.bolsamza.com.ar/revistanew/content.php?id_contenido=317
-
-%Pocas regiones áridas acumulan tantos años de registro de las acumulaciones anuales de nieve, y de los caudales de los principales ríos que atraviesan su territorio, como las provincias de Cuyo. El  cuidadoso registro, validación, análisis de esa información y su aplicación a diversas metodologías de pronóstico, permite una mejor estimación del comportamiento futuro de los escurrimientos.
-
-%La acumulación nívea observada  en el frente cordillerano hasta finales del mes de septiembre de 2014, entre  los  paralelos  30º  y  36º  de  latitud  Sur,  se  ha  caracterizado  como  una  temporada deficitaria,  respecto  de  los  valores  medios  históricos, en todas las  cuencas  de  los  ríos  de  la Provincia.
-%Se observa que la acumulación nívea actual, en las altas cuencas de los ríos cordilleranos, está entre las más bajas de los últimos años. 
+De acuerdo a \cite{DGI2014} en el ciclo 2014-2015, los ríos de Mendoza, transportarán un volumen de agua que no superará la media histórica, debido a las escasas nevadas caídas hasta setiembre de este año. De esta manera los ríos Mendoza, Tunuyán, Diamante y Malargue, ingresarán en el quinto año consecutivo de emergencia hídrica, en tanto, el río Atuel, en el sexto. En general, los volúmenes a escurrir en todos los ríos de la provincia de Mendoza, se encuentran por debajo de las medias históricas, con porcentajes menores al 65\% de  las mismas, en casi todas las cuencas provinciales. 
 
 La determinación de la evapotranspiración real de cultivo ($ET_r$) a escala regional es de fundamental importancia para distribuir eficientemente el agua de riego en los oasis y facilitar la toma de decisiones de los administradores y usuarios del recurso. Permite, además, relacionándola con el agua entregada a nivel de canal, estimar indicadores de eficiencia en el uso del agua. 
 
@@ -67,9 +56,11 @@ La estimación de las necesidades de agua de los cultivos a partir de la cuantif
 
 \section{Estado del arte}
 
-Los sensores remotos son un aporte a la estimación de la ET utilizando sensores remotos, que consideran los patrones espacio temporales en el suelo. Los sensores remotos han permitido diferentes enfoques para estimar la ETr siguiendo enfoques físicos o empíricos. Uno de los modelos mas citados para estimar la ETr a partir del modelo de balance de energía de la superficie, es METRIC (en inglés Mapping EvapoTranspiration at high Resolution with Internalized Calibration) \citep{Allen2007a}. METRIC fue desarrollado en base al reconocido modelo SEBAL (del inglés Surface Energy Balance Algorithm for Land) \citep{Bastiaanssen1998a, Bastiaanssen1998b}. 
+Los sensores remotos son un aporte a la estimación de la $ET_r$ utilizando sensores remotos, que consideran los patrones espacio temporales en el suelo. Los sensores remotos han permitido diferentes enfoques para estimar la ETr siguiendo enfoques físicos o empíricos. Uno de los modelos mas citados para estimar la ETr a partir del modelo de balance de energía de la superficie, es METRIC (en inglés Mapping EvapoTranspiration at high Resolution with Internalized Calibration) \citep{Allen2007a}. METRIC fue desarrollado en base al reconocido modelo SEBAL (del inglés Surface Energy Balance Algorithm for Land) \citep{Bastiaanssen1998a, Bastiaanssen1998b}. 
 
-Estos métodos basado en procesamiento de imágenes satelitales para calcular la ETr como un residuo del balance de energía de la superficie de la Tierra. Su gran innovación es que en el modelado del balance energético, usa el gradiente de temperatura cercano a la superficie, $dT$, íntimamente relacionado a la temperatura de superficie medida radiométricamente, eliminando la necesidad de un modelo de temperatura de la superficie aerodinámicamente preciso y absoluto y la necesidad de mediciones de la temperatura del aire para estimar el flujo de calor sensible en superficie. Además otras ventajas sobre los métodos tradicionales de balances de energía obtenidos con satélite: 
+METRIC ha sido aplicado en muchos países del mundo para estimar la ET de los cultivos, a escalas parcelarias en grandes superficies, utilizando imágenes satelitales. Este modelo se ha aplicado a diferentes cultivos como maiz, trigo, soja y alfalfa con excelentes resultados (errores de 3 a 20\%) \citep{Allen2007b, Choi2009, Mkhwanazi2012}. En años recientes se ha aplicado a cultivos leñosos con canopeos esparcidas como viñas y olivos \citep{Poblete-Echeverria2012, Carrasco-Benavides2014, Santos2012, Pocas2014}. Y recientemente se a aplicado a superficies con mucha pendiente \citep{Allen2013}.
+
+Este método se basa en el procesamiento de imágenes satelitales para calcular la ETr como un residuo del balance de energía de la superficie de la Tierra. Su gran innovación es que en el modelado del balance energético, usa el gradiente de temperatura cercano a la superficie, $dT$, íntimamente relacionado a la temperatura de superficie medida radiométricamente, eliminando la necesidad de un modelo de temperatura de la superficie aerodinámicamente preciso y absoluto y la necesidad de mediciones de la temperatura del aire para estimar el flujo de calor sensible en superficie. Además otras ventajas sobre los métodos tradicionales de balances de energía obtenidos con satélite: 
 
 \begin{itemize}
 	\item que su calibración se realiza utilizando solamente $ET_o$. El uso de esta variable para la extrapolación de la $ET_r$ instantánea para periodos de 24hs o mayores, compensa los efectos de advección regional por no ligar $ET_r$ a la radiación neta, dado que la $ET_c$ puede exceder la radiación neta diaria en muchas áreas áridas o semiáridas.
@@ -77,14 +68,11 @@ Estos métodos basado en procesamiento de imágenes satelitales para calcular la
 	\item el balance de energía también permite detectar ETc restringida por déficit hídrico ($K_h$) y limitantes edáficas ($K_s$).
 \end{itemize}
 
-Los avances en la tecnología  de la percepción remota,  la modelización matemática y la instalación de un lisímetro de pesada en cultivo de vid en Luján de Cuyo, Mendoza, posibilitarían la estimación de la $ET_r$ y el desarrollo de un sitio web para la adquisición del dato en tiempo real. Los mapas de $ET_r$ obtenidos, permitirían además comparar consumos entre parcelas y zonas, cuantificar el uso de agua mensual y por temporada, apoyar modelos de agua subterránea, determinar coeficientes y curvas medias de $K_c$ para diferentes sistemas productivos.
+Los avances en la tecnología  de la percepción remota,  la modelización físico-matemática y la instalación de un lisímetro de pesada en cultivo de vid en Luján de Cuyo, Mendoza, posibilitarían la estimación de la $ET_r$ y el desarrollo de un sitio web para la adquisición del dato en tiempo real. Los mapas de $ET_r$ obtenidos, permitirían además comparar consumos entre parcelas y zonas, cuantificar el uso de agua mensual y por temporada, apoyar modelos de agua subterránea, determinar coeficientes y curvas medias de $K_c$ para diferentes sistemas productivos.
 
-%% Coeficientes de cultivo duales
-Sin embargo, cuando los cultivos tienen una cobertura parcial del suelo, el uso de coeficientes duales de cultivo es mas apropiado. El cultivo de la vid, conducido en espaldera puede tener una fracción de cobertura ($f_c$) de enrte 30 y 35\% \citep{Poblete-Echeverria2012a}. Además con coeficientes duales de cultivo también son mas apropiados bajo prácticas de riego de alta frecuecia, como en el caso de riego por goteo. 
+Sin embargo, cuando los cultivos tienen una cobertura parcial del suelo, el uso de coeficientes duales de cultivo es mas apropiado \citep{Allen2006}. El cultivo de la vid, conducido en espaldera puede tener una fracción de cobertura ($f_c$) de enrte 30 y 35\% \citep{Allen2000, Poblete-Echeverria2012a}. Además con coeficientes duales de cultivo también son mas apropiados bajo prácticas de riego de alta frecuecia, como en el caso de riego por goteo. En vid, bajo clima árido los coeficientes duales han tenido un mejor desempeño que modelos de doble capa como el modelo de Shuttlework-Wallace \citep{Zhao2015a, Shuttleworth1985}
 
-El uso de  coeficientes duales.. .. bla. Empiezo por \citep{Allen2000}.
-
-Aplicaciones en vid: \citep{Poblete-Echeverria2012a} y \citep{Zhao2015a}.
+Además, bajo condiciones de campo, la evapotranspiración real del cultivo puede desviarse de ETc debido a condiciones no óptimas como son la presencia de plagas y enfermedades, salinidad del suelo, baja fertilidad del suelo y déficit o exceso de agua. Esto puede resultar en un reducido crecimiento y menor densidad de plantas y así reducir la tasa de evapotranspiración por  debajo de los valores de $ET_c$ \citep{Allen2006}
 
 Y apoyo con sensores remotos en \citep{Er-Raki2007}, y particion en \citep{Er-Raki2010}.
 
@@ -92,33 +80,9 @@ Y apoyo con sensores remotos en \citep{Er-Raki2007}, y particion en \citep{Er-Ra
 
 
 
-%% SEnsores remotos y LSEB
-El enfoque de SEBAL (balance de energía de la superficie) utiliza datos de temperatura de la superficie mediante sensores remotos, la reflectividad y NDVI. Este modelo utiliza un esquema de transferencia con una fuente de resistencia, donde se deriva $r_{s} $, $H$, y $\lambda E$ a la humedad de suelos cercana a la superficie. Este esquema hace un uso explícito de la variabilidad espacial observada de la temperatura de la superficie, y su reflectancia en una escena completa libre de nubes. 
-
-
-\cite{Kalma2008} menciona que el error de unos 30 trabajos de validacion mendiante métodos de flujo (eddy correlation, bowen ratio) publicados esta en torno a 50 $W m^2$ y los errores relativos son de entre 15\% y 30\%. Este autor también menciona que la comparación muestra que los métodos analíticos y físicos mas complejos no son necesariamente mas precisos que los enfoques empíricos / estadísticos. 
-Se ha mejorado mucho el conocimiento de los procesos de evaporación, a escala local, a partir del trabajo con Edddy correlation / Bowen ratio. Pero estas observaciones raramente pueden extenderse a grandes areas, debido a la heterogeneidad de las superficies y la naturaleza dinámica de los procesos de transferencia del calor. 
-En general lo métodos para estimar la $E$ mediante sensores remotos difieren en: (i) tipo y extensión espacial de la aplicación; (ii) tipo de dato de sensores remotos; (iii) el uso de información (micro) meteorologica y de cobertura de suelos.
-De acuerdo a Su (2002, citado por \cite{Kalma2008}) hay 3 grandes enfoques en los métodos de balance de energía. El enfoque residual: como en METRIC donde se estima el$LE$, a partir de la diferencia entre la $Rn$, y $H$ y $G$. El segundo enfoque utiliza el índice de estrés hídrico para estimar la evapotranspiración relativa (la relación entre la $ETa/ETp$) y luego estimar la $ETa$ conociendo la $ETp$, a partir de datos meteorlógicos. Y el tercer y último enfoque es calcular todos los componentes del balance de energía a nivel de superficie mediante modelos continuos de superficie (LSM, por sus siglas en inglés) que incluyen modelos de transferencia suelos--planta--atmósfera (SVAT). 
-La temperatura del suelo superficial incide en los cuatro términos de la ecuación del balance de energía, y en la radiación de onda larga saliente en la ecuación de radiación neta.
-La temperatura radiativa de la superficie, medida por un radiómetro infrarrojo desde una plataforma espacial, se asume como aproximadamente la temperatura radiométrica hemiesférica (Norman and Becker, 1995 citado por \cite{Kalma2008}).
-La temperatura de la superficie medida por sensores remotos tiene efectos atmosféricos relacionados con la absorción de la radiación infrarroja por vapor de agua en la atmósfera.
-
-\subsection{Sensible heat flux}
-
-Table \ref{tab:components} shows a review of some errors reported about METRIC model. In this sense, net radiation ($R_n$) and soil heat flux ($G$) usually had the lowest estimation errors. Sensible heat flux ($H$), is the hardest component of surface energy balance to estimate. As \cite{Allen2007a} mentions, the computation of latent heat flux ($LE$) is only as accurate as the summed estimates for Rn, G, and H. 
-
-One reported weak of METRIC model is the selection of the anchor pixels. In \cite{long2013assessing} and \cite{mortonassessing} the differences in H estimation produced by different trained users were evaluated, showing important biases; while in \cite{choragudi2011sensitivity, wang2009sensitivity} an analysis showed the high sensitivity of the model respect to the hot pixel.
-
-The aforementioned causes that the METRIC estimation of $H$ be very sensible to the selection of anchor pixels, due that a group of possible candidates could have minimal differences in some attributes, but these differences can generate important bias in the estimations.
-
-In the early implementations of METRIC, the anchor pixels selection was done manually by an operator, but then a methodology to an automation procedure  was proposed in \cite{allenautomated2013} using statistical conditions and expert knowledge. This method  aiming to avoid the effect of human criteria that helps to increase the model robustness.
-
 \section{Marco teórico}
 
-METRIC ha sido aplicado en muchos países del mundo para estimar la ET de los cultivos, a escalas parcelarias en grandes superficies, utilizando imágenes satelitales. Este modelo se ha aplicado a diferentes cultivos como maiz, trigo, soja y alfalfa con excelentes resultados (errores de 3 a 20\%) \citep{Allen2007b, Choi2009, Mkhwanazi2012}. En años recientes se ha aplicado a cultivos leñosos con canopeos esparcidas como viñas y olivos \citep{Poblete-Echeverria2012, Carrasco-Benavides2014, Santos2012, Pocas2014}. Y recientemente se a aplicado a superficies con mucha pendiente \citep{Allen2013}.
-
-METRIC estima la ETr como residuo de la ecuación de balance de energía (Ec. \ref{eq:EB}), utilizando información de imágenes satelitales y de una estación meteorológica ubicada dentro del área de estudio. 
+METRIC estima la $ET_r$ como residuo de la ecuación de balance de energía (Ec. \ref{eq:EB}), utilizando información de imágenes satelitales y de una estación meteorológica ubicada dentro del área de estudio. 
 
 \begin{equation}
 \label{eq:EB}
@@ -136,7 +100,7 @@ Luego, $H$ es estimada a partir de la selección de píxeles ancla en la imagen.
 H=\frac{\rho \cdot c_{p} \cdot dT}{r_{ah}} 
 \end{equation}
 
-La estimación de $dT$ es calculada utilizando la relación linear entre la temperatura del aire y  los píxeles ancla, como es descripto en  \cite{Bastiaanssen1998a}. Para estimar $r_{ah}$, se extrapola la velocidad del viento (medida en la estación meteorológica) a una altura donde se lo considera constante (por ejemplo, 200 meters), y se le aplica un procesos de corrección de la estabilidad iterativo basado en las ecuaciones de Monin-Obhukov \cite{Allen1996}.
+La estimación de $dT$ es calculada utilizando la relación linear entre la temperatura del aire y  los píxeles ancla, como es descripto en  \citep{Bastiaanssen1998a}. Para estimar $r_{ah}$, se extrapola la velocidad del viento (medida en la estación meteorológica) a una altura donde se lo considera constante (por ejemplo, 200 meters), y se le aplica un procesos de corrección de la estabilidad iterativo basado en las ecuaciones de Monin-Obhukov \citep{Allen1996}.
 
 Luego, $LE$ es estimado con la ecuación \ref{eq:EB}, y posteriormente, la evapotranspiración instantánea se calcula como:
 
@@ -151,6 +115,30 @@ Finalmente la ETr diaria es calculada para cada píxel (30 x 30 m) mediante:
 ET_{24} = \frac{ET_{inst}}{ET_r} ET_{r\_24}
 \label{eq:et24}
 \end{equation}
+
+
+%% SEnsores remotos y LSEB
+El enfoque de SEBAL (balance de energía de la superficie) utiliza datos de temperatura de la superficie mediante sensores remotos, la reflectividad y NDVI. Este modelo utiliza un esquema de transferencia con una fuente de resistencia, donde se deriva $r_{s} $, $H$, y $\lambda E$ a la humedad de suelos cercana a la superficie. Este esquema hace un uso explícito de la variabilidad espacial observada de la temperatura de la superficie, y su reflectancia en una escena completa libre de nubes. 
+
+
+\citep{Kalma2008} menciona que el error de unos 30 trabajos de validacion mendiante métodos de flujo (eddy correlation, bowen ratio) publicados esta en torno a 50 $W m^2$ y los errores relativos son de entre 15\% y 30\%. Este autor también menciona que la comparación muestra que los métodos analíticos y físicos mas complejos no son necesariamente mas precisos que los enfoques empíricos / estadísticos. 
+Se ha mejorado mucho el conocimiento de los procesos de evaporación, a escala local, a partir del trabajo con Edddy correlation / Bowen ratio. Pero estas observaciones raramente pueden extenderse a grandes areas, debido a la heterogeneidad de las superficies y la naturaleza dinámica de los procesos de transferencia del calor. 
+En general lo métodos para estimar la $E$ mediante sensores remotos difieren en: (i) tipo y extensión espacial de la aplicación; (ii) tipo de dato de sensores remotos; (iii) el uso de información (micro) meteorologica y de cobertura de suelos.
+De acuerdo a Su (2002, citado por \citep{Kalma2008}) hay 3 grandes enfoques en los métodos de balance de energía. El enfoque residual: como en METRIC donde se estima el$LE$, a partir de la diferencia entre la $Rn$, y $H$ y $G$. El segundo enfoque utiliza el índice de estrés hídrico para estimar la evapotranspiración relativa (la relación entre la $ETa/ETp$) y luego estimar la $ETa$ conociendo la $ETp$, a partir de datos meteorlógicos. Y el tercer y último enfoque es calcular todos los componentes del balance de energía a nivel de superficie mediante modelos continuos de superficie (LSM, por sus siglas en inglés) que incluyen modelos de transferencia suelos--planta--atmósfera (SVAT). 
+La temperatura del suelo superficial incide en los cuatro términos de la ecuación del balance de energía, y en la radiación de onda larga saliente en la ecuación de radiación neta.
+La temperatura radiativa de la superficie, medida por un radiómetro infrarrojo desde una plataforma espacial, se asume como aproximadamente la temperatura radiométrica hemiesférica (Norman and Becker, 1995 citado por \citep{Kalma2008}).
+La temperatura de la superficie medida por sensores remotos tiene efectos atmosféricos relacionados con la absorción de la radiación infrarroja por vapor de agua en la atmósfera.
+
+\subsection{Sensible heat flux}
+
+Table \ref{tab:components} shows a review of some errors reported about METRIC model. In this sense, net radiation ($R_n$) and soil heat flux ($G$) usually had the lowest estimation errors. Sensible heat flux ($H$), is the hardest component of surface energy balance to estimate. As \citep{Allen2007a} mentions, the computation of latent heat flux ($LE$) is only as accurate as the summed estimates for Rn, G, and H. 
+
+One reported weak of METRIC model is the selection of the anchor pixels. In \citep{long2013assessing} and \citep{mortonassessing} the differences in H estimation produced by different trained users were evaluated, showing important biases; while in \citep{choragudi2011sensitivity, wang2009sensitivity} an analysis showed the high sensitivity of the model respect to the hot pixel.
+
+The aforementioned causes that the METRIC estimation of $H$ be very sensible to the selection of anchor pixels, due that a group of possible candidates could have minimal differences in some attributes, but these differences can generate important bias in the estimations.
+
+In the early implementations of METRIC, the anchor pixels selection was done manually by an operator, but then a methodology to an automation procedure  was proposed in \citep{allenautomated2013} using statistical conditions and expert knowledge. This method  aiming to avoid the effect of human criteria that helps to increase the model robustness.
+
 
 \section{Hipótesis}
 \begin{itemize}
@@ -183,6 +171,10 @@ Se realizará un estudio observacional, mediante sensores proximales y remotos p
 
 Este estudio es diacrónico ya que se evaluarán las variables en estudio a lo largo del ciclo del cultivo y en diferentes años.
 
+Las mediciones de campo para el estudio de las escalas planta y parcelario se realizarán en una parcela de 2.44 ha de vid, variedad Malbec (clon 19 INTA) conducida en espaldero alto. El riego de la parcela es por goteros autocompensados (q 1.6 l/h espaciados a 0.6m). 
+
+Sobre esta parcela se encuentra instalado un lisímetro de pesada \citep{Olmedo2012}. Los lisímetros son tanques  aislados rellenos con suelo disturbado o no disturbado en los que el cultivo crece  y se desarrolla en las mismas condiciones del campo \citep{Montoro2008}. En lisímetros de pesaje de precisión, la evapotranspiración se puede obtener con una exactitud de décimos de milímetro, donde la pérdida de agua es medida directamente por el cambio de masa y períodos pequeños tales como una hora pueden ser considerados. 
+Las técnicas micrometeorológicas como el método de la relación de Bowen o la covarianza de torbellinos se pueden utilizar para medir directamente la $ET_r$, pero los lisímetros de pesada siguen considerándose el método estándar de determinación \citep{Payero2008}.
 %Como voy a probar cada hipotesis. Procedimientos de obtenicion y de analisis de datos. Instrumental metodologico o tecnico. Etapas.
 
 \subsection{Objetivo Específico 1}
@@ -209,7 +201,7 @@ Los sensores remotos, junto con modelos físicos permiten estimar la evapotransp
 
 
 
-
+\clearpage
 \bibliographystyle{apalike}
 \bibliography{library}
 
